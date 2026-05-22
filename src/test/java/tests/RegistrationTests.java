@@ -16,6 +16,12 @@ public class RegistrationTests {
     @Test
     void successfulRegistrationTest() {
         new RegistrationPage()
-                .openPage();
+                .openPage()
+                .setFirstName("Aikerim")
+                .setLastName("Testova")
+                .setEmail("aikerim@test.com")
+                .setGender("Female")
+                .setPhone("1234567890")
+                .clickSubmit();
     }
 }
