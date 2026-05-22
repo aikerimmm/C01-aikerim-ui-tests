@@ -27,4 +27,21 @@ public class RegistrationTests extends BaseTest {
                     .clickSubmit();
         });
     }
+
+    @Test
+    @DisplayName("Заполнение только обязательных полей")
+    @Description("Позитивно заполняются только обязательные поля")
+    void successfulRequiredRegistrationTest() {
+        step("Открыть страницу регистрации", () -> {
+            registrationPage.openPage();
+        });
+        step("Заполнить поля формы", () -> {
+            registrationPage
+                    .setFirstName(testData.userName)
+                    .setLastName(testData.lastName)
+                    .setPhone(testData.userNumber)
+                    .setDateOfBirth(testData.birthDate, testData.birthMonth, testData.birthYear)
+                    .clickSubmit();
+        });
+    }
 }
