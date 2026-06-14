@@ -1,7 +1,0 @@
-8834154040:AAEGVavg673aqizg9VcYCXfHwmCDMmbkCcg
-
-https://api.telegram.org/bot8834154040:AAEGVavg673aqizg9VcYCXfHwmCDMmbkCcg/getUpdates
-
--1003571566536
-
-curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "-1003571566536", "text": "This is a test from QA_Guru_chatbox", "disable_notification": true}' https://api.telegram.org/bot8834154040:AAEGVavg673aqizg9VcYCXfHwmCDMmbkCcg/sendMessage
