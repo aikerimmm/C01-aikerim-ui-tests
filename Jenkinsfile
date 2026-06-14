@@ -17,7 +17,7 @@ pipeline {
 
     post {
         always {
-            sh 'java -DconfigFile=notifications/config.json -jar notifications/allure-notifications-4.2.1.jar'
+            sh 'java -DconfigFile=notifications/config.json -jar notifications/allure-notifications-3.1.1.jar'
         }
     }
 }
