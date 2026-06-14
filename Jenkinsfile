@@ -12,6 +12,14 @@ pipeline {
                 sh './gradlew clean test'
             }
         }
+
+        stage('Generate Allure Report') {
+            steps {
+                sh '''
+                    allure generate build/allure-results --clean -o build/allure-report
+                '''
+            }
+        }
     }
 
     post {
