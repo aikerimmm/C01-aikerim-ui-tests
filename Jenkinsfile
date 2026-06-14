@@ -19,16 +19,12 @@ pipeline {
             }
         }
     }
-
-    post {
-        always {
-            sh """
-                java \
-                    -DconfigFile=notifications/config.json \
-                    -jar notifications/allure-notifications-4.11.0.jar \
-                    -token ${TELEGRAM_BOT_TOKEN} \
-                    -chat ${TELEGRAM_CHAT_ID}
-            """
-        }
-    }
-}
+  post {
+      always {
+          sh """
+              java \
+                  -DconfigFile=notifications/config.json \
+                  -jar notifications/allure-notifications-4.11.0.jar
+          """
+      }
+  }
