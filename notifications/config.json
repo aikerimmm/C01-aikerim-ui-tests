@@ -9,7 +9,7 @@
     "enableChart": true
   },
   "telegram": {
-    "token": "6138449008:AAHxCbdUihar1yX5jS7Al4O9xVFn2MUcIiM",
+    "token": "8834154040:AAEGVavg673aqizg9VcYCXfHwmCDMmbkCcg",
     "chat": "478526897",
     "templatePath": "/templates/telegram.ftl"
   }
