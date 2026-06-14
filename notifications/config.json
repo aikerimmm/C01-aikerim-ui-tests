@@ -1,0 +1,18 @@
+{
+  "base": {
+    "project": "C01-aikerim-ui-tests",
+    "environment": "main",
+    "comment": "Regression run",
+    "reportLink": "",
+    "language": "en",
+    "allureFolder": "build/allure-results",
+    "enableChart": true
+  },
+  "telegram": {
+    "token": "",
+    "chat": "",
+    "templatePath": "/templates/telegram.ftl"
+  }
+}
+
+
