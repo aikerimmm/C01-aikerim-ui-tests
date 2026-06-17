@@ -14,6 +14,7 @@ def selenideVersion = "7.13.0",
 
 configurations {
     aspectjweaver
+    allureCommandline
 }
 
 dependencies {
@@ -25,6 +26,9 @@ dependencies {
             "io.qameta.allure:allure-junit5:$allureVersion"
     )
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    allureCommandline("io.qameta.allure:allure-commandline:$allureVersion") {
+        transitive = false
+    }
 }
 
 tasks.withType(Test) {
@@ -32,7 +36,6 @@ tasks.withType(Test) {
     systemProperty 'allure.results.directory', 'build/allure-results'
     jvmArgs "-javaagent:${configurations.aspectjweaver.asPath}"
 
-    // Передаём параметры из командной строки в тесты
     systemProperty 'base.url', System.getProperty('base.url', 'https://demoqa.com')
     systemProperty 'browser', System.getProperty('browser', 'chrome')
     systemProperty 'browser.version', System.getProperty('browser.version', '128.0')
@@ -47,4 +50,17 @@ tasks.withType(Test) {
             exceptionFormat "short"
         }
     }
+}
+
+tasks.register('allureReport', JavaExec) {
+    dependsOn test
+    classpath = configurations.allureCommandline
+    mainClass = 'io.qameta.allure.CommandLine'
+    args = ['generate', 'build/allure-results', '--clean', '-o', 'build/allure-report']
+}
+
+tasks.register('allureServe', JavaExec) {
+    classpath = configurations.allureCommandline
+    mainClass = 'io.qameta.allure.CommandLine'
+    args = ['serve', 'build/allure-results']
 }

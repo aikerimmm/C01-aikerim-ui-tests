@@ -3,7 +3,7 @@
     "project": "C01-aikerim-ui-tests",
     "environment": "main",
     "comment": "Regression run",
-    "reportLink": "",
+    "reportLink": "http://localhost:8080/job/C01-aikerim-ui-tests/lastBuild/allure/",
     "language": "en",
     "allureFolder": "build/allure-report",
     "enableChart": true
