@@ -6,11 +6,11 @@
     "reportLink": "",
     "language": "en",
     "allureFolder": "build/allure-report",
-    "enableChart": true
+    "enableChart": false
   },
   "telegram": {
-    "token": "",
-    "chat": "",
+    "token": "8834154040:AAEGVavg673aqizg9VcYCXfHwmCDMmbkCcg",
+    "chat": "-5333469481",
     "templatePath": "/templates/telegram.ftl"
   }
 }
