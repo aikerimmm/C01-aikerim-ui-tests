@@ -1,66 +1,42 @@
 plugins {
-    id 'java-library'
+    id 'java'
+    id 'io.qameta.allure' version '2.10.0'
+}
+
+allure {
+    report {
+        version.set("2.19.0")
+    }
+    adapter {
+        aspectjWeaver.set(true)
+        frameworks {
+            junit5 {
+                adapterVersion.set("2.19.0")
+            }
+        }
+    }
 }
 
 repositories {
     mavenCentral()
 }
 
-def selenideVersion = "7.13.0",
-    allureVersion = "2.27.0",
-    junitVersion = "5.14.1",
-    slf4jVersion = "2.0.17",
-    aspectjVersion = "1.9.22"
-
-configurations {
-    aspectjweaver
-    allureCommandline
-}
-
 dependencies {
-    aspectjweaver("org.aspectj:aspectjweaver:$aspectjVersion")
     testImplementation(
-            "com.codeborne:selenide:$selenideVersion",
-            "org.junit.jupiter:junit-jupiter:$junitVersion",
-            "org.slf4j:slf4j-simple:$slf4jVersion",
-            "io.qameta.allure:allure-junit5:$allureVersion"
+            'org.junit.jupiter:junit-jupiter:5.14.2',
+            'com.codeborne:selenide:7.15.0',
+            'io.qameta.allure:allure-selenide:2.27.0',
+            'org.aspectj:aspectjweaver:1.9.22',
+            'org.slf4j:slf4j-simple:2.0.13'
     )
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    allureCommandline("io.qameta.allure:allure-commandline:$allureVersion") {
-        transitive = false
-    }
+    testRuntimeOnly('org.junit.platform:junit-platform-launcher')
 }
 
-tasks.withType(Test) {
+test {
     useJUnitPlatform()
-    systemProperty 'allure.results.directory', 'build/allure-results'
-    jvmArgs "-javaagent:${configurations.aspectjweaver.asPath}"
-
-    systemProperty 'base.url', System.getProperty('base.url', 'https://demoqa.com')
-    systemProperty 'browser', System.getProperty('browser', 'chrome')
-    systemProperty 'browser.version', System.getProperty('browser.version', '128.0')
-    systemProperty 'browser.size', System.getProperty('browser.size', '1920x1080')
-    systemProperty 'headless', System.getProperty('headless', 'false')
-    systemProperty 'selenoid.url', System.getProperty('selenoid.url',
-            'https://user1:1234@selenoid.autotests.cloud/wd/hub')
-
-    testLogging {
-        lifecycle {
-            events "started", "skipped", "failed", "standard_error", "standard_out"
-            exceptionFormat "short"
-        }
-    }
+    systemProperties(System.getProperties())
 }
 
-tasks.register('allureReport', JavaExec) {
-    dependsOn test
-    classpath = configurations.allureCommandline
-    mainClass = 'io.qameta.allure.CommandLine'
-    args = ['generate', 'build/allure-results', '--clean', '-o', 'build/allure-report']
-}
-
-tasks.register('allureServe', JavaExec) {
-    classpath = configurations.allureCommandline
-    mainClass = 'io.qameta.allure.CommandLine'
-    args = ['serve', 'build/allure-results']
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
 }
