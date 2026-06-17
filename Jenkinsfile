@@ -7,14 +7,16 @@ pipeline {
                 sh './gradlew clean test || true'
             }
         }
+
+        stage('Generate Allure Report') {
+            steps {
+                sh './gradlew allureReport'
+            }
+        }
     }
 
     post {
         always {
-            allure([
-                includeProperties: false,
-                results: [[path: 'build/allure-results']]
-            ])
             sh 'java -DconfigFile=notifications/config.json -jar notifications/allure-notifications-4.2.1.jar'
         }
     }
