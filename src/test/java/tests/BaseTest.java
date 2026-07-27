@@ -23,8 +23,7 @@ public class BaseTest {
         Configuration.browserVersion = System.getProperty("browser.version", "");
         Configuration.browserSize = System.getProperty("browser.size", "1920x1080");
         Configuration.headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
-        Configuration.remote = System.getProperty("selenoid.url",
-                "https://user1:1234@selenoid.autotests.cloud/wd/hub");
+        Configuration.remote = System.getProperty("selenoid.url");
 
 
         ChromeOptions options = new ChromeOptions();
